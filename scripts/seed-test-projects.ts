@@ -35,12 +35,13 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(HERE, '..');
 const SKILLS_DIR = path.join(REPO_ROOT, 'skills');
+const DESIGN_TEMPLATES_DIR = path.join(REPO_ROOT, 'design-templates');
 const BUNDLED_PLUGIN_EXAMPLES_DIR = path.join(REPO_ROOT, 'plugins', '_official', 'examples');
 const COMMUNITY_PLUGIN_EXAMPLES_DIR = path.join(REPO_ROOT, 'plugins', 'community', 'examples');
 const SEED_PREFIX = 'seed-';
 
 type SeedKind = 'deck' | 'prototype';
-type SeedSourceKind = 'skill' | 'default-plugin' | 'community-plugin';
+type SeedSourceKind = 'skill' | 'design-template' | 'default-plugin' | 'community-plugin';
 type SeedMode = 'auto' | 'online' | 'offline';
 
 interface SeedFixture {
@@ -224,6 +225,36 @@ const COMMUNITY_PLUGINS: SeedFixture[] = [
   },
 ];
 
+const PRODUCTION_SAMPLES: SeedFixture[] = [
+  {
+    skillId: 'mobile-app',
+    sourceKind: 'design-template',
+    kind: 'prototype',
+    name: 'Lingo — Travel Translator',
+    pendingPrompt:
+      'Design a focused mobile translation home for a traveler in Japan. Keep one dominant voice action, readable source and translated text, and genuine phone chrome.',
+    source: 'examples/lingo-travel-translation.html',
+  },
+  {
+    skillId: 'mobile-onboarding',
+    sourceKind: 'design-template',
+    kind: 'prototype',
+    name: 'Finpath — First Money Plan',
+    pendingPrompt:
+      'Design a three-screen finance onboarding flow: choose an intent, show an immediately useful plan, then finish with a calm trust moment.',
+    source: 'examples/finpath-first-plan.html',
+  },
+  {
+    skillId: 'ad-creative-factory',
+    sourceKind: 'design-template',
+    kind: 'prototype',
+    name: 'NomadTalk — Travel Campaign',
+    pendingPrompt:
+      'Create an app-install campaign for a travel translator in 9:16, 4:5, and 1:1. Keep the generated visual text-free and compose copy, product UI, brand, and CTA in HTML.',
+    source: 'example.html',
+  },
+];
+
 interface Args {
   daemonUrl: string | null;
   dataDir: string | null;
@@ -233,6 +264,7 @@ interface Args {
   webs: number;
   defaultPlugins: number;
   communityPlugins: number;
+  productionSamples: number;
   clear: boolean;
 }
 
@@ -246,6 +278,7 @@ function parseArgs(argv: string[]): Args {
     webs: WEBS.length,
     defaultPlugins: DEFAULT_PLUGINS.length,
     communityPlugins: COMMUNITY_PLUGINS.length,
+    productionSamples: 0,
     clear: false,
   };
   for (let i = 0; i < argv.length; i++) {
@@ -290,6 +323,8 @@ function parseArgs(argv: string[]): Args {
       out.defaultPlugins = Math.max(0, Number(argv[++i]) || 0);
     } else if (a === '--community-plugins') {
       out.communityPlugins = Math.max(0, Number(argv[++i]) || 0);
+    } else if (a === '--production-samples') {
+      out.productionSamples = Math.max(0, Number(argv[++i]) || 0);
     } else if (a === '--clear') {
       out.clear = true;
     } else if (a === '-h' || a === '--help') {
@@ -340,6 +375,9 @@ Options:
   --community-plugins <n>
                      Number of community plugin artifacts to seed
                      (default: ${COMMUNITY_PLUGINS.length}, max: ${COMMUNITY_PLUGINS.length})
+  --production-samples <n>
+                     Number of curated no-code review samples to seed
+                     (default: 0, max: ${PRODUCTION_SAMPLES.length})
   --clear            Delete every previously seeded project (id prefix '${SEED_PREFIX}')
   -h, --help         Show this help
 
@@ -486,12 +524,16 @@ function fixtureRoot(fix: SeedFixture): string {
   if (fix.sourceKind === 'community-plugin') {
     return path.join(COMMUNITY_PLUGIN_EXAMPLES_DIR, fix.skillId);
   }
+  if (fix.sourceKind === 'design-template') {
+    return path.join(DESIGN_TEMPLATES_DIR, fix.skillId);
+  }
   return path.join(SKILLS_DIR, fix.skillId);
 }
 
 function sourceLabel(fix: SeedFixture): string {
   if (fix.sourceKind === 'default-plugin') return `plugins/_official/examples/${fix.skillId}`;
   if (fix.sourceKind === 'community-plugin') return `plugins/community/examples/${fix.skillId}`;
+  if (fix.sourceKind === 'design-template') return `design-templates/${fix.skillId}`;
   return `skills/${fix.skillId}`;
 }
 
@@ -523,7 +565,7 @@ async function seedOneOnline(daemonUrl: string, fix: SeedFixture): Promise<strin
   }>(daemonUrl, 'POST', '/api/projects', {
     id,
     name: fix.name,
-    skillId: fix.sourceKind === 'skill' ? fix.skillId : null,
+    skillId: fix.sourceKind === 'skill' || fix.sourceKind === 'design-template' ? fix.skillId : null,
     pendingPrompt: fix.pendingPrompt,
     metadata: seedMetadata(fix),
   });
@@ -747,7 +789,7 @@ async function seedOneOffline(ctx: OfflineSeedContext, fix: SeedFixture): Promis
     ).run(
       id,
       fix.name,
-      fix.sourceKind === 'skill' ? fix.skillId : null,
+      fix.sourceKind === 'skill' || fix.sourceKind === 'design-template' ? fix.skillId : null,
       null,
       fix.pendingPrompt,
       JSON.stringify(metadata),
@@ -877,9 +919,10 @@ async function main() {
   const webs = WEBS.slice(0, args.webs);
   const defaultPlugins = DEFAULT_PLUGINS.slice(0, args.defaultPlugins);
   const communityPlugins = COMMUNITY_PLUGINS.slice(0, args.communityPlugins);
-  const fixtures = [...decks, ...webs, ...defaultPlugins, ...communityPlugins];
+  const productionSamples = PRODUCTION_SAMPLES.slice(0, args.productionSamples);
+  const fixtures = [...decks, ...webs, ...defaultPlugins, ...communityPlugins, ...productionSamples];
   if (fixtures.length === 0) {
-    console.error('--decks 0, --webs 0, --default-plugins 0, and --community-plugins 0 — nothing to do.');
+    console.error('--decks 0, --webs 0, --default-plugins 0, --community-plugins 0, and --production-samples 0 — nothing to do.');
     process.exit(2);
   }
 
@@ -889,7 +932,8 @@ async function main() {
   console.log(
     `seeding ${decks.length} skill deck(s) + ${webs.length} skill web prototype(s) + ` +
       `${defaultPlugins.length} default plugin artifact(s) + ` +
-      `${communityPlugins.length} community plugin artifact(s) → ${mode}:${target}`,
+      `${communityPlugins.length} community plugin artifact(s) + ` +
+      `${productionSamples.length} production sample(s) → ${mode}:${target}`,
   );
   const failures: string[] = [];
   const createdIds: string[] = [];
