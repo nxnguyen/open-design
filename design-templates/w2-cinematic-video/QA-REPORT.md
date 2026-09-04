@@ -10,7 +10,8 @@
 - Video duration: 30.000 seconds
 - Audio duration: 30.000 seconds
 - Audio sample rate: 48 kHz
-- Delivery bitrate: approximately 5.08 Mb/s
+- Delivery bitrate: approximately 4.28 Mb/s
+- Color: YUV 4:2:0 limited range, BT.709 primaries/transfer/matrix
 - File: `out/w2-cinematic-30s-raw.mp4`
 
 ## Automated checks
@@ -19,7 +20,7 @@
 - Remotion full render: pass
 - Video dimensions/frame count/duration (`ffprobe`) — pass
 - Audio duration/sample rate (`ffprobe`) — pass
-- Mastered loudness: −15.57 LUFS integrated, −1.49 dB true peak — pass
+- Mastered loudness: −15.56 LUFS integrated, −1.50 dB true peak — pass
 - Source-to-output audio lag: −0.375 ms — pass
 - Maximum shot-boundary error against selected beat grid: 0.413 frame — pass
 - Styleframe preview at desktop and 390 px mobile: zero browser console errors — pass
@@ -34,6 +35,11 @@
 - No placeholder UI or generated product screenshot is present.
 - The final CTA holds for more than three seconds and the W2 wordmark holds for
   more than five seconds.
+- Every state in the accelerated product recap now holds for at least 16 frames.
+- The in-video CTA identifies Android; the paid-social campaign supplies the
+  actual destination through its native CTA configuration.
+- Mixed demo geographies are explicitly labeled as sample UI; the marketing
+  copy does not present any sample location as the viewer’s live forecast.
 - Product claims shown are limited to capabilities visible in the supplied
   Figma design: forecast, radar, tide, UV, wind and air quality.
 

@@ -12,8 +12,8 @@ export const RadarToTide: React.FC = () => {
   return (
     <AbsoluteFill style={{overflow: 'hidden'}}>
       <Atmosphere intensity={0.86} />
-      <Eyebrow style={{position: 'absolute', left: 70, top: 108}}>From atmosphere to ocean</Eyebrow>
-      <DisplayTitle size={122} style={{position: 'absolute', left: 66, top: 190, width: 950}}>
+      <Eyebrow style={{position: 'absolute', left: 70, top: 150}}>From atmosphere to ocean</Eyebrow>
+      <DisplayTitle size={122} style={{position: 'absolute', left: 66, top: 232, width: 950}}>
         See it move.<br /><span style={{color: COLORS.cyan}}>Before it hits.</span>
       </DisplayTitle>
       <div style={{
@@ -35,10 +35,19 @@ export const RadarToTide: React.FC = () => {
         }} /> : null}
       </div>
       <div style={{
-        position: 'absolute', left: 70, bottom: 130, color: COLORS.muted,
+        position: 'absolute', left: 70, bottom: 260, color: COLORS.muted,
         fontFamily: 'Inter, sans-serif', fontSize: 31, lineHeight: 1.3, letterSpacing: 1.2,
         opacity: progress(frame, 80, 98) * (1 - exit),
       }}>Live radar. Daily tide.<br />One continuous forecast.</div>
+      <div style={{
+        position: 'absolute', left: 330, top: 522, width: 420, height: 54,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        borderRadius: 27, border: '1px solid rgba(64,231,255,.5)',
+        background: 'rgba(2,18,31,.9)', color: COLORS.white,
+        boxShadow: '0 14px 36px rgba(0,0,0,.38)',
+        fontFamily: 'Inter, sans-serif', fontSize: 20, fontWeight: 750,
+        letterSpacing: 2.4, textTransform: 'uppercase',
+      }}>Sample UI locations</div>
       <Vignette />
     </AbsoluteFill>
   );

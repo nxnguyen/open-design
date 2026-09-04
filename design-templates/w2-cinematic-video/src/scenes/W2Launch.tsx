@@ -69,10 +69,19 @@ export const W2Launch: React.FC = () => {
         fontFamily: 'Inter, sans-serif', fontSize: 35, fontWeight: 850, letterSpacing: -0.5,
         opacity: cta, transform: `scale(${interpolate(cta, [0, 1], [0.82, 1])})`,
         boxShadow: '0 24px 65px rgba(0,0,0,.38)',
-      }}>Download W2</div>
+      }}>Get W2 on Android</div>
       <div style={{
-        position: 'absolute', left: 0, bottom: 82, width: '100%', textAlign: 'center',
-        fontFamily: 'Inter, sans-serif', fontSize: 22, color: COLORS.muted, letterSpacing: 4,
+        position: 'absolute', left: 340, top: 1490, width: 400, height: 52,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        borderRadius: 26, border: '1px solid rgba(64,231,255,.5)',
+        background: 'rgba(2,18,31,.9)', color: COLORS.white,
+        boxShadow: '0 14px 36px rgba(0,0,0,.38)',
+        fontFamily: 'Inter, sans-serif', fontSize: 20, fontWeight: 750,
+        letterSpacing: 2.4, textTransform: 'uppercase', opacity: progress(frame, 110, 132),
+      }}>Sample product UI</div>
+      <div style={{
+        position: 'absolute', left: 0, top: 1585, width: '100%', textAlign: 'center',
+        fontFamily: 'Inter, sans-serif', fontSize: 19, color: COLORS.muted, letterSpacing: 3.4,
         textTransform: 'uppercase', opacity: progress(frame, 110, 132),
       }}>Forecast · Radar · Tide · Air quality</div>
       <Vignette />

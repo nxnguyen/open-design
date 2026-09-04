@@ -26,8 +26,8 @@ export const ForecastOrbit: React.FC = () => {
           transform: `scale(${1 + Math.sin(frame / 36 + index * 1.7) * 0.05})`,
         }} />
       ))}
-      <Eyebrow style={{position: 'absolute', left: 74, top: 108}}>One glance · every signal</Eyebrow>
-      <DisplayTitle size={108} style={{position: 'absolute', left: 70, top: 190, width: 900}}>
+      <Eyebrow style={{position: 'absolute', left: 74, top: 150}}>One glance · every signal</Eyebrow>
+      <DisplayTitle size={108} style={{position: 'absolute', left: 70, top: 232, width: 900}}>
         Your forecast.<br />In focus.
       </DisplayTitle>
       <Device src="screens/thirty-days.png" width={510} imageOffset={interpolate(frame, [0, durationInFrames], [-2, 2])} style={{

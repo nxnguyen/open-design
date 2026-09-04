@@ -24,7 +24,7 @@ export const Opening: React.FC = () => {
         transform: 'rotate(14deg)', filter: 'blur(34px)', opacity: 0.36,
         background: 'linear-gradient(90deg, transparent, rgba(152,234,255,.88), transparent)',
       }} />
-      <Eyebrow style={{position: 'absolute', left: 74, top: 112}}>W2 Weather · Berlin</Eyebrow>
+      <Eyebrow style={{position: 'absolute', left: 74, top: 150}}>W2 Weather · Live outlook</Eyebrow>
       <Device src="screens/today.png" width={610} style={{
         left: 362, top: 255, opacity: 1 - exit,
         transform: `translateY(${interpolate(entrance, [0, 1], [142, 0]) + drift}px) rotate(${interpolate(entrance, [0, 1], [9, -4])}deg) scale(${1 - exit * 0.05})`,

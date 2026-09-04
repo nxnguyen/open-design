@@ -5,7 +5,8 @@ import {progress} from '../timeline';
 
 const cards = [
   {src: 'elements/precipitation.png', top: 570, left: 58, width: 460, delay: 14},
-  {src: 'elements/humidity.png', top: 570, left: 562, width: 460, delay: 23},
+  {src: 'elements/wind.png', top: 570, left: 562, width: 220, delay: 23},
+  {src: 'code:uv', top: 570, left: 802, width: 220, delay: 28},
   {src: 'elements/wind.png', top: 835, left: 58, width: 460, delay: 32},
   {src: 'elements/aqi.png', top: 835, left: 562, width: 460, delay: 41},
 ] as const;
@@ -25,8 +26,8 @@ export const SignalSelfTest: React.FC = () => {
   return (
     <AbsoluteFill style={{overflow: 'hidden'}}>
       <Atmosphere intensity={0.72} />
-      <Eyebrow style={{position: 'absolute', left: 70, top: 108}}>Live weather intelligence</Eyebrow>
-      <DisplayTitle size={118} style={{position: 'absolute', left: 67, top: 190, width: 940}}>
+      <Eyebrow style={{position: 'absolute', left: 70, top: 150}}>Live weather intelligence</Eyebrow>
+      <DisplayTitle size={118} style={{position: 'absolute', left: 67, top: 232, width: 940}}>
         Rain. Wind.<br /><span style={{color: COLORS.cyan}}>UV. Air.</span>
       </DisplayTitle>
       <div style={{
@@ -41,7 +42,42 @@ export const SignalSelfTest: React.FC = () => {
         }} />
         {cards.map((card) => {
           const p = progress(frame, card.delay, card.delay + 18);
-          return <AssetCard key={card.src} src={card.src} width={card.width} style={{
+          if (card.src === 'code:uv') {
+            return <div key={card.src} style={{
+              position: 'absolute', left: card.left - 54, top: card.top - 533,
+              width: card.width, height: 218, borderRadius: 21, padding: '18px 17px',
+              opacity: p, transform: `translateY(${interpolate(p, [0, 1], [54, 0])}px)`,
+              background: 'linear-gradient(145deg, #343d59, #252e48)', color: COLORS.white,
+              fontFamily: 'Inter, sans-serif', boxShadow: '0 26px 38px rgba(0,0,0,.38)',
+            }}>
+              <div style={{color: '#c8d4df', fontSize: 16, fontWeight: 750}}>☼ UV INDEX</div>
+              <strong style={{display: 'block', fontSize: 48, lineHeight: 1, marginTop: 17}}>2</strong>
+              <div style={{fontSize: 22, marginTop: 5}}>Low</div>
+              <div style={{height: 8, borderRadius: 9, marginTop: 14, background: 'linear-gradient(90deg, #89c83a, #ffdc31, #ff8137, #802aac)'}} />
+              <div style={{fontSize: 13, lineHeight: 1.25, color: '#e1eaf1', marginTop: 12}}>Minimal sun protection needed.</div>
+            </div>;
+          }
+          if (card.src === 'elements/aqi.png') {
+            return <div key={card.src} style={{
+              position: 'absolute', left: card.left - 54, top: card.top - 533,
+              width: card.width, height: 247, borderRadius: 26, padding: '24px 26px',
+              opacity: p, transform: `translateY(${interpolate(p, [0, 1], [54, 0])}px)`,
+              background: 'linear-gradient(145deg, #343d59, #252e48)',
+              color: COLORS.white, fontFamily: 'Inter, sans-serif',
+              boxShadow: '0 36px 45px rgba(0,0,0,.45)',
+            }}>
+              <div style={{color: '#c8d4df', fontSize: 20, fontWeight: 750, letterSpacing: 2}}>◉ AIR QUALITY</div>
+              <div style={{display: 'flex', alignItems: 'baseline', gap: 18, marginTop: 18}}>
+                <strong style={{fontSize: 68, lineHeight: 1}}>30</strong>
+                <span style={{fontSize: 25, color: '#bce97b', fontWeight: 850}}>GOOD</span>
+              </div>
+              <div style={{position: 'relative', height: 10, borderRadius: 10, marginTop: 20, background: 'linear-gradient(90deg, #8cc83b, #ffde32, #ff8734, #d83f51, #6f35b2)'}}>
+                <i style={{position: 'absolute', left: '7%', top: -5, width: 20, height: 20, borderRadius: '50%', background: '#fff', boxShadow: '0 0 0 4px #303952'}} />
+              </div>
+              <div style={{fontSize: 16, color: '#e5edf4', marginTop: 18}}>Good air quality · Enjoy the outdoors.</div>
+            </div>;
+          }
+          return <AssetCard key={`${card.src}-${card.left}`} src={card.src} width={card.width} style={{
             left: card.left - 54, top: card.top - 533, opacity: p,
             transform: `translateY(${interpolate(p, [0, 1], [54, 0])}px)`,
           }} />;

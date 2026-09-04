@@ -9,7 +9,7 @@
     "render:preview": "remotion render src/index.ts W2Cinematic out/iterations/latest-preview.mp4 --scale=0.333333 --concurrency=4",
     "render:mix": "remotion render src/index.ts W2Cinematic out/w2-cinematic-30s-mix.mp4 --concurrency=4",
     "render:audio": "remotion render src/index.ts W2Cinematic out/w2-cinematic-audio-mix.wav --codec=wav --concurrency=4",
-    "render": "npm run render:mix && npm run render:audio && ffmpeg -y -hide_banner -loglevel error -i out/w2-cinematic-30s-mix.mp4 -i out/w2-cinematic-audio-mix.wav -t 30 -map 0:v:0 -map 1:a:0 -c:v copy -af loudnorm=I=-16:TP=-1.5:LRA=11 -ar 48000 -c:a aac -b:a 192k -movflags +faststart out/w2-cinematic-30s-raw.mp4",
+    "render": "npm run render:mix && npm run render:audio && ffmpeg -y -hide_banner -loglevel error -i out/w2-cinematic-30s-mix.mp4 -i out/w2-cinematic-audio-mix.wav -t 30 -filter_complex \"[0:v:0]scale=in_range=full:out_range=tv:in_color_matrix=bt709:out_color_matrix=bt709,format=yuv420p[v];[1:a:0]loudnorm=I=-16:TP=-1.5:LRA=11[a]\" -map \"[v]\" -map \"[a]\" -r 30 -c:v libx264 -preset medium -crf 18 -profile:v high -level:v 4.1 -pix_fmt yuv420p -color_range tv -colorspace bt709 -color_primaries bt709 -color_trc bt709 -x264-params \"colorprim=bt709:transfer=bt709:colormatrix=bt709:fullrange=off\" -ar 48000 -c:a aac -b:a 192k -movflags +faststart out/w2-cinematic-30s-raw.mp4",
     "render:nobgm": "remotion render src/index.ts W2Cinematic out/w2-cinematic-30s-nobgm.mp4 --props=props-nobgm.json --concurrency=4"
   },
   "dependencies": {

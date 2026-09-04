@@ -3,7 +3,7 @@ import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame, useVideoCon
 import {Atmosphere, COLORS, DisplayTitle, Eyebrow, Vignette} from '../components';
 import {progress} from '../timeline';
 
-const cuts = [0, 44, 59, 74, 81, 89, 93];
+const cuts = [0, 33, 60, 82, 100, 116];
 const screens = [
   'screens/today.png', 'screens/thirty-days.png', 'screens/metrics.png',
   'screens/sun-moon.png', 'screens/radar-tide.png', 'screens/moon-tide.png',
@@ -28,7 +28,7 @@ export const ForecastAccelerando: React.FC = () => {
         transform: `scale(${interpolate(impact, [0, 1], [1.07, 1])})`, opacity: 1 - exit,
       }} />
       <div style={{position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(1,7,13,.05) 28%, rgba(1,7,13,.88) 75%, #01070d 100%)'}} />
-      <Eyebrow style={{position: 'absolute', left: 70, top: 112}}>The whole weather story</Eyebrow>
+      <Eyebrow style={{position: 'absolute', left: 70, top: 150}}>The whole weather story</Eyebrow>
       <DisplayTitle size={158} style={{position: 'absolute', left: 66, top: 1170, width: 960}}>
         {labels[index % labels.length]}<span style={{color: COLORS.cyan}}>.</span>
       </DisplayTitle>
