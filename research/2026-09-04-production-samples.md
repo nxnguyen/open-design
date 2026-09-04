@@ -55,3 +55,22 @@ pnpm tools-dev run web --daemon-port 17456 --web-port 17573 \
 ```
 
 Open `http://127.0.0.1:17573`, choose **Local Agent → Codex CLI** during first-run onboarding, then review the three projects under **Recent projects**.
+
+## Final self-review
+
+- **Correctness:** the black-box seed test creates exactly three projects and verifies two mobile UI artifacts plus one ad artifact. All three were also opened through the real OpenDesign project route.
+- **Readability:** the TypeScript change extends the existing fixture/source-kind pattern; it does not introduce a parallel seeder or lifecycle command.
+- **Architecture:** no app, daemon, contract, authentication, storage, or preview-runtime source was changed. The new content stays in the first-party `design-templates/` boundary and is consumed by the existing seed path.
+- **Security:** templates contain no credentials, remote scripts, trackers, external fonts, or external asset requests. Interactive samples only mutate their own DOM.
+- **Performance:** the generated raster is loaded once through the existing local asset route. Seeding is bounded by the requested count and remains capped by the three-item fixture list.
+
+Verification completed on Node 24 / pnpm 10.33.2:
+
+- `pnpm guard`
+- `pnpm typecheck`
+- `pnpm --filter @open-design/web build`
+- production-sample seed test
+- localized-content and iframe-shell template tests
+- browser review of all three seeded projects with five before/after rounds
+
+Verdict: **approved for the fork branch**. No blocking correctness, architecture, security, or performance findings remain.
