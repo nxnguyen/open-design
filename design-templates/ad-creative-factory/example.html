@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NomadTalk — Travel without the language barrier</title>
+  <style>
+    :root {
+      --stage: #151914;
+      --paper: #f4efe3;
+      --ink: #173e34;
+      --ink-soft: #466259;
+      --sun: #f0b43e;
+      --coral: #e86645;
+      --line: rgba(244, 239, 227, .17);
+      --display: Georgia, 'Times New Roman', serif;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--stage); color: var(--paper); font-family: var(--sans); }
+    body { margin: 0; min-width: 320px; }
+    .stage { margin: 0 auto; max-width: 1510px; padding: 42px 34px 70px; }
+    .stage-head { align-items: end; border-bottom: 1px solid var(--line); display: flex; gap: 32px; justify-content: space-between; margin-bottom: 28px; padding-bottom: 24px; }
+    .eyebrow, .ratio-label, .meta { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow { color: #91b3a6; margin: 0 0 10px; }
+    .stage h1 { font: 500 clamp(34px, 4vw, 58px)/.94 var(--display); letter-spacing: -.045em; margin: 0; }
+    .stage-intro { color: rgba(244, 239, 227, .6); font-size: 13px; line-height: 1.55; margin: 12px 0 0; max-width: 66ch; }
+    .system-badge { border: 1px solid var(--line); border-radius: 999px; color: rgba(244, 239, 227, .72); flex: none; font-size: 11px; padding: 9px 12px; }
+    .creative-grid { align-items: start; display: grid; gap: 20px; grid-template-columns: minmax(180px, 9fr) minmax(240px, 12.8fr) minmax(270px, 16fr); }
+    .creative-wrap { min-width: 0; }
+    .ratio-label { align-items: center; color: rgba(244, 239, 227, .55); display: flex; justify-content: space-between; margin: 0 2px 9px; }
+    .ratio-label b { color: var(--sun); font-size: 9px; font-weight: 800; }
+    .creative { background: var(--paper); box-shadow: 0 24px 70px rgba(0,0,0,.34); container-type: inline-size; isolation: isolate; overflow: hidden; position: relative; width: 100%; }
+    .story { aspect-ratio: 9/16; }
+    .feed { aspect-ratio: 4/5; }
+    .square { aspect-ratio: 1; }
+    .photo, .scrim, .graphic-ring { inset: 0; pointer-events: none; position: absolute; }
+    .photo { height: 100%; object-fit: cover; width: 100%; z-index: -3; }
+    .story .photo { object-position: 41% center; }
+    .feed .photo { object-position: 40% center; }
+    .square .photo { object-position: 38% 55%; }
+    .scrim { background: linear-gradient(180deg, rgba(244,239,227,.92) 0%, rgba(244,239,227,.7) 35%, rgba(244,239,227,0) 62%), linear-gradient(90deg, rgba(244,239,227,.06) 30%, rgba(244,239,227,.74) 100%); z-index: -2; }
+    .feed .scrim { background: linear-gradient(180deg, rgba(244,239,227,.96) 0 39%, rgba(244,239,227,.08) 66%), linear-gradient(90deg, transparent 30%, rgba(244,239,227,.62)); }
+    .square .scrim { background: linear-gradient(90deg, rgba(23,62,52,.02) 24%, rgba(244,239,227,.9) 72%), linear-gradient(180deg, rgba(244,239,227,.55), transparent 55%); }
+    .safe { display: flex; flex-direction: column; height: 100%; padding: 7.5%; position: relative; }
+    .brand { align-items: center; color: var(--ink); display: flex; font-size: 4.2cqw; font-weight: 900; justify-content: space-between; letter-spacing: -.045em; }
+    .brand-mark { align-items: center; background: var(--ink); border-radius: 50%; color: var(--sun); display: inline-flex; font-size: 2.4cqw; height: 6.5cqw; justify-content: center; width: 6.5cqw; }
+    .campaign-tag { color: var(--ink-soft); font-size: 2.2cqw; font-weight: 800; letter-spacing: .12em; margin-top: 2.2cqw; text-transform: uppercase; }
+    .headline { color: var(--ink); font: 600 11.8cqw/.84 var(--display); letter-spacing: -.075em; margin: 11cqw 0 0; max-width: 92%; text-wrap: balance; }
+    .headline em { color: var(--coral); font-weight: 500; }
+    .subhead { color: var(--ink-soft); font-size: 3.1cqw; line-height: 1.4; margin: 3.5cqw 0 0; max-width: 64%; }
+    .product { background: rgba(255,255,255,.93); border: .9cqw solid var(--ink); border-radius: 5.5cqw 5.5cqw 0 0; bottom: -7%; box-shadow: 0 7cqw 16cqw rgba(23,62,52,.2); color: var(--ink); display: flex; flex-direction: column; height: 45%; padding: 5cqw 3.5cqw; position: absolute; right: 6%; transform: rotate(3.5deg); width: 39%; }
+    .product::before { background: var(--ink); border-radius: 99px; content: ''; height: 1.7cqw; left: 50%; position: absolute; top: 1.7cqw; transform: translateX(-50%); width: 12cqw; }
+    .product-bar { display: flex; font-size: 2cqw; font-weight: 850; justify-content: space-between; }
+    .product-label { color: var(--ink-soft); font-size: 1.65cqw; font-weight: 800; letter-spacing: .12em; margin-top: 5cqw; text-transform: uppercase; }
+    .product-copy { font: 600 4.8cqw/.95 var(--display); letter-spacing: -.045em; margin-top: 1.5cqw; }
+    .mic { align-items: center; background: var(--ink); border-radius: 50%; color: white; display: flex; font-size: 2.2cqw; height: 9cqw; justify-content: center; margin: auto; width: 9cqw; }
+    .translation { background: #edf1eb; border-radius: 1.3cqw; font-size: 2cqw; line-height: 1.35; padding: 2cqw; }
+    .cta { align-items: center; background: var(--ink); border-radius: 1.3cqw; bottom: 7.5%; color: white; display: flex; font-size: 2.8cqw; font-weight: 850; justify-content: space-between; left: 7.5%; letter-spacing: -.01em; min-height: 9cqw; padding: 0 3.3cqw; position: absolute; width: 45%; }
+    .cta span { color: var(--sun); font-size: 4cqw; }
+    .story .product { height: 40%; width: 43%; }
+    .story .cta { bottom: 7.5%; width: 41%; }
+    .feed .headline { font-size: 10.4cqw; margin-top: 6.5cqw; max-width: 82%; }
+    .feed .subhead { font-size: 2.7cqw; max-width: 50%; }
+    .feed .product { height: 48%; width: 35%; }
+    .feed .cta { width: 38%; }
+    .square .safe { padding: 6%; }
+    .square .brand { font-size: 3.4cqw; }
+    .square .brand-mark { font-size: 1.7cqw; height: 5cqw; width: 5cqw; }
+    .square .campaign-tag { font-size: 1.6cqw; margin-top: 1.7cqw; }
+    .square .headline { font-size: 9.2cqw; margin-left: 43%; margin-top: 10cqw; max-width: 56%; }
+    .square .subhead { font-size: 2.3cqw; margin-left: 44%; max-width: 46%; }
+    .square .product { bottom: -10%; height: 54%; left: 6%; right: auto; transform: rotate(-3deg); width: 31%; }
+    .square .cta { bottom: 7%; left: 50%; min-height: 7.5cqw; width: 42%; }
+    .creative-note { color: rgba(244,239,227,.5); font-size: 10px; line-height: 1.45; margin: 10px 2px 0; }
+    @media (max-width: 780px) {
+      .creative-grid { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
+      .creative-wrap:last-child { grid-column: 1/-1; max-width: 620px; }
+    }
+    @media (max-width: 700px) {
+      .stage { padding: 18px 16px 40px; }
+      .stage-head { align-items: flex-start; flex-direction: column; margin-bottom: 16px; padding-bottom: 14px; }
+      .stage h1 { font-size: 28px; max-width: 13ch; }
+      .stage-intro, .system-badge { display: none; }
+      .eyebrow { margin-bottom: 7px; }
+      .creative-grid { display: flex; flex-direction: column; gap: 24px; }
+      .creative-wrap { margin: 0 auto; max-width: 520px; width: 100%; }
+      .story { margin: 0 auto; width: min(100%, 260px); }
+    }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <main class="stage" data-od-id="campaign-stage">
+    <header class="stage-head">
+      <div><p class="eyebrow">Campaign system · App install</p><h1>One idea. Three native crops.</h1><p class="stage-intro">NomadTalk keeps the visual flexible and the words exact: photography carries emotion; HTML carries product proof, copy, logo, and CTA.</p></div>
+      <span class="system-badge">TOKYO · ACQUISITION · V1</span>
+    </header>
+    <section class="creative-grid" aria-label="Ba tỉ lệ quảng cáo">
+      <article class="creative-wrap"><div class="ratio-label"><span>STORY / REELS</span><b>1080 × 1920</b></div>
+        <div class="creative story" data-od-id="creative-story" data-ratio="story">
+          <img class="photo" src="/api/skills/ad-creative-factory/assets/tokyo-traveler.png" alt="Du khách cầm điện thoại trong ga tàu Tokyo buổi sáng" />
+          <div class="scrim"></div><div class="safe"><div class="brand">NomadTalk <span class="brand-mark">N</span></div><div class="campaign-tag">Your pocket interpreter</div><h2 class="headline" data-od-id="headline-story">Nói chuyện<br />ở <em>bất cứ đâu.</em></h2><p class="subhead">Dịch giọng nói và camera ngay khi bạn cần.</p><div class="product" data-od-id="product-story"><div class="product-bar"><b>NomadTalk</b><span>••</span></div><div class="product-label">Bạn muốn nói gì?</div><div class="product-copy">Ga Tokyo<br />ở đâu?</div><div class="mic">●</div><div class="translation">東京駅はどこですか？</div></div><div class="cta" data-od-id="cta-story">Dùng thử miễn phí <span>→</span></div></div>
+        </div><p class="creative-note">Title-safe 8% · product proof above CTA · visual can recrop without touching copy.</p>
+      </article>
+      <article class="creative-wrap"><div class="ratio-label"><span>FEED</span><b>1080 × 1350</b></div>
+        <div class="creative feed" data-od-id="creative-feed" data-ratio="feed">
+          <img class="photo" src="/api/skills/ad-creative-factory/assets/tokyo-traveler.png" alt="Du khách cầm điện thoại trong ga tàu Tokyo buổi sáng" />
+          <div class="scrim"></div><div class="safe"><div class="brand">NomadTalk <span class="brand-mark">N</span></div><div class="campaign-tag">Travel with confidence</div><h2 class="headline" data-od-id="headline-feed">Hiểu ngay.<br /><em>Đi tự tin.</em></h2><p class="subhead">Camera, voice và hội thoại trong một app.</p><div class="product" data-od-id="product-feed"><div class="product-bar"><b>NomadTalk</b><span>••</span></div><div class="product-label">Camera translate</div><div class="product-copy">出口<br />Lối ra</div><div class="mic">✓</div><div class="translation">Đã dịch tức thì</div></div><div class="cta" data-od-id="cta-feed">Tải ứng dụng <span>→</span></div></div>
+        </div><p class="creative-note">First-frame clarity · readable product UI · conversion-led hierarchy.</p>
+      </article>
+      <article class="creative-wrap"><div class="ratio-label"><span>SQUARE</span><b>1080 × 1080</b></div>
+        <div class="creative square" data-od-id="creative-square" data-ratio="square">
+          <img class="photo" src="/api/skills/ad-creative-factory/assets/tokyo-traveler.png" alt="Du khách cầm điện thoại trong ga tàu Tokyo buổi sáng" />
+          <div class="scrim"></div><div class="safe"><div class="brand">NomadTalk <span class="brand-mark">N</span></div><div class="campaign-tag">Tokyo, 07:42</div><h2 class="headline" data-od-id="headline-square">Tokyo không còn <em>xa lạ.</em></h2><p class="subhead">Mọi biển báo, thực đơn và câu chuyện — đã hiểu.</p><div class="product" data-od-id="product-square"><div class="product-bar"><b>NomadTalk</b><span>••</span></div><div class="product-label">Live translate</div><div class="product-copy">Xin chào,<br />Tokyo.</div><div class="mic">●</div><div class="translation">こんにちは、東京。</div></div><div class="cta" data-od-id="cta-square">Bắt đầu chuyến đi <span>→</span></div></div>
+        </div><p class="creative-note">Centered crop zone · emotion first · still carries real product evidence.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
