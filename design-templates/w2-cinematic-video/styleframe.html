@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:," />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>W2 cinematic direction — styleframes</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, "SF Pro Display", system-ui, sans-serif;
+        background: #030913;
+        color: #f7fbff;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; padding: 64px; background: radial-gradient(circle at 50% 0%, #102f50, #030913 48%); }
+      header { max-width: 1540px; margin: 0 auto 36px; }
+      .eyebrow { color: #16d9f4; letter-spacing: .18em; font-size: 13px; font-weight: 800; text-transform: uppercase; }
+      h1 { margin: 10px 0 4px; font-size: 42px; letter-spacing: -.045em; }
+      header p { margin: 0; color: #9fb4c8; font-size: 18px; }
+      .gallery { display: grid; grid-template-columns: repeat(3, minmax(260px, 1fr)); gap: 30px; max-width: 1540px; margin: auto; }
+      .frame { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 28px; background: #06101f; box-shadow: 0 32px 90px rgba(0,0,0,.48), inset 0 0 0 1px rgba(255,255,255,.1); isolation: isolate; }
+      .frame::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,.09), transparent 18%, transparent 72%, rgba(0,0,0,.48)); z-index: 8; }
+      .sky { position: absolute; inset: 0; background: radial-gradient(circle at 75% 13%, rgba(39,196,255,.72), transparent 29%), radial-gradient(circle at 12% 32%, rgba(255,255,255,.16), transparent 26%), linear-gradient(155deg, #0ba8ed, #075da3 43%, #06101f 78%); }
+      .orb { position: absolute; width: 92%; aspect-ratio: 1; left: 4%; top: 20%; border-radius: 50%; border: 1px solid rgba(59,212,255,.28); box-shadow: 0 0 90px rgba(22,217,244,.12), inset 0 0 80px rgba(22,217,244,.08); }
+      .phone { position: absolute; width: 58%; left: 21%; top: 17%; border-radius: 38px; overflow: hidden; background: #111a27; padding: 7px; box-shadow: 0 60px 110px rgba(0,0,0,.62), 0 0 0 1px rgba(255,255,255,.18); transform: perspective(1200px) rotateY(-8deg) rotateX(3deg); z-index: 3; }
+      .phone img { width: 100%; display: block; border-radius: 31px; }
+      .copy { position: absolute; left: 8%; right: 8%; bottom: 7%; z-index: 10; }
+      .kicker { color: #16d9f4; font-size: clamp(12px, 1.5vw, 20px); font-weight: 850; letter-spacing: .18em; }
+      .headline { margin-top: 9px; font-size: clamp(30px, 4.9vw, 70px); font-weight: 850; line-height: .92; letter-spacing: -.06em; text-transform: uppercase; text-wrap: balance; }
+      .signal-stage { position: absolute; inset: 0; background: radial-gradient(circle at 50% 31%, rgba(10,148,223,.48), transparent 34%), linear-gradient(#071727, #030912); }
+      .signal-stage::before { content: ""; position: absolute; inset: 0; opacity: .2; background-image: linear-gradient(rgba(74,185,236,.2) 1px, transparent 1px), linear-gradient(90deg, rgba(74,185,236,.2) 1px, transparent 1px); background-size: 40px 40px; mask-image: linear-gradient(transparent, #000 30%, #000 72%, transparent); }
+      .cards { position: absolute; inset: 14% 5% 22%; display: grid; grid-template-columns: 1fr 1fr; align-content: center; gap: 14px; z-index: 2; transform: perspective(1100px) rotateX(6deg); }
+      .cards img { width: 100%; border-radius: 18px; box-shadow: 0 22px 45px rgba(0,0,0,.38); }
+      .cards .wide { grid-column: 1 / -1; }
+      .launch { position: absolute; inset: 0; background: radial-gradient(circle at 50% 44%, rgba(17,143,213,.72), transparent 26%), radial-gradient(circle at 50% 45%, rgba(22,217,244,.2), transparent 51%), linear-gradient(165deg, #0d87cc, #07213d 55%, #030912); }
+      .launch-card { position: absolute; width: 43%; filter: drop-shadow(0 28px 35px rgba(0,0,0,.45)); }
+      .launch-card.one { top: 13%; left: -5%; transform: rotate(-8deg); }
+      .launch-card.two { top: 11%; right: -6%; transform: rotate(7deg); }
+      .launch-card.three { bottom: 11%; left: -8%; transform: rotate(6deg); }
+      .launch-card.four { bottom: 14%; right: -8%; transform: rotate(-6deg); }
+      .wordmark { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; z-index: 5; }
+      .mark { font-size: clamp(96px, 14vw, 196px); font-weight: 900; line-height: .8; letter-spacing: -.09em; text-shadow: 0 20px 70px rgba(0,0,0,.55), 0 0 80px rgba(22,217,244,.3); }
+      .tag { margin-top: 28px; color: #d9edfa; font-size: clamp(16px, 2vw, 28px); letter-spacing: .19em; font-weight: 750; text-transform: uppercase; }
+      @media (max-width: 980px) { body { padding: 28px; } .gallery { grid-template-columns: 1fr; max-width: 430px; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="eyebrow">Selected direction · Atmospheric Forecast Cinema</div>
+      <h1>W2 Weather — 30-second vertical motion system</h1>
+      <p>Three production styleframes using the real Figma screens and components.</p>
+    </header>
+    <main class="gallery">
+      <section class="frame" aria-label="Opening styleframe">
+        <div class="sky"></div><div class="orb"></div>
+        <div class="phone"><img src="public/screens/today.png" alt="W2 Today screen" /></div>
+        <div class="copy"><div class="kicker">W2 WEATHER</div><div class="headline">See the day ahead.</div></div>
+      </section>
+      <section class="frame" aria-label="Weather signals styleframe">
+        <div class="signal-stage"></div>
+        <div class="cards">
+          <img src="public/elements/precipitation.png" alt="Precipitation card" />
+          <img src="public/elements/humidity.png" alt="Humidity card" />
+          <img class="wide" src="public/elements/aqi.png" alt="Air quality card" />
+          <img class="wide" src="public/elements/radar.png" alt="Radar card" />
+        </div>
+        <div class="copy"><div class="kicker">LIVE SIGNALS</div><div class="headline">Rain. Wind. UV. Air.</div></div>
+      </section>
+      <section class="frame" aria-label="Final launch styleframe">
+        <div class="launch"></div>
+        <img class="launch-card one" src="public/elements/today-chart.png" alt="Hourly forecast" />
+        <img class="launch-card two" src="public/elements/aqi.png" alt="AQI" />
+        <img class="launch-card three" src="public/elements/radar.png" alt="Radar" />
+        <img class="launch-card four" src="public/elements/tide.png" alt="Tide" />
+        <div class="wordmark"><div class="mark">W2</div><div class="tag">Know what’s next.</div></div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "w2-cinematic-video",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "still": "remotion still src/index.ts W2Cinematic out/qa/still.png",
+    "render:preview": "remotion render src/index.ts W2Cinematic out/iterations/latest-preview.mp4 --scale=0.333333 --concurrency=4",
+    "render": "remotion render src/index.ts W2Cinematic out/w2-cinematic-30s-raw.mp4 --concurrency=4",
+    "render:nobgm": "remotion render src/index.ts W2Cinematic out/w2-cinematic-30s-nobgm.mp4 --props=props-nobgm.json --concurrency=4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.484",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "remotion": "4.0.484"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "typescript": "6.0.3"
+  }
+}
+
