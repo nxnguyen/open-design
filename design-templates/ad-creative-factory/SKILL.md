@@ -52,6 +52,7 @@ Create one coherent campaign direction in three production ratios: Story/Reels 9
 6. Use `object-position` independently for each ratio. Add a contrast scrim where copy crosses photography.
 7. Validate at 1440px, 768px, and 320px. Frames may stack on narrow viewports; no frame may overflow horizontally.
 8. Self-critique in this order: composition, message clarity, product visibility, crop safety, typography, branding, micro-detail.
+9. When the user asks for files that can be uploaded to an ad platform, render the approved HTML into three exact-size PNGs and one Story MP4. Keep the editable HTML as the source of truth.
 
 ## Hard rules
 
@@ -74,3 +75,25 @@ Emit one complete HTML document inside an artifact block:
 ```
 
 One sentence before the artifact and nothing after it.
+
+## Production export
+
+For a ready-to-run campaign, save the artifact HTML and run the bundled renderer from the repository root:
+
+```bash
+node --experimental-strip-types \
+  design-templates/ad-creative-factory/scripts/render-campaign.ts \
+  --campaign "Campaign name" \
+  --source design-templates/ad-creative-factory/example.html \
+  --output-dir design-templates/ad-creative-factory/exports/campaign-slug \
+  --duration 10
+```
+
+The export is complete only when `manifest.json` lists all of these deliverables:
+
+- `story.png` — 1080×1920
+- `feed.png` — 1080×1350
+- `square.png` — 1080×1080
+- `story.mp4` — H.264, 1080×1920, 30fps, 3–30 seconds
+
+Use `--png-only` when the brief explicitly excludes motion. The MP4 is a subtle motion-poster rendition; create a multi-scene edit when the campaign brief requires voice-over, captions, or a product demo sequence.

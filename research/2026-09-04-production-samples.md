@@ -24,9 +24,17 @@ Exactly three production samples:
 
 Each sample is a self-contained HTML artifact that can be opened, duplicated, and iterated with Codex inside the normal OpenDesign project workflow.
 
+The NomadTalk sample also has upload-ready outputs under `design-templates/ad-creative-factory/exports/nomadtalk/`: three exact-size PNGs and a 10-second H.264 Story video. The bundled TypeScript renderer recreates them from the editable HTML without baking copy, branding, or product UI into generated imagery.
+
 ## Risk-first prototype
 
 The highest-risk surface is the ad sample because its generated raster must crop cleanly in three ratios while preserving reliable copy and product UI. Generate only the visual background with GPT Image; compose all text and controls in HTML/CSS. Validate all three crops in the running sandboxed preview.
+
+## Runtime stability finding
+
+Node 24.19+ can abort OpenDesign's daemon while `better-sqlite3@12.10.0` statements are collected (`RemoveEnvironmentCleanupHook`, `env != nullptr`). This reproduced locally on Node 24.20 during real Codex runs and matches [upstream issue #6462](https://github.com/nexu-io/open-design/issues/6462). The fork upgrades to `better-sqlite3@13.0.3`; version 13 moved the addon to N-API and ships Node-version-independent prebuilds, as documented in the [official better-sqlite3 releases](https://github.com/WiseLibs/better-sqlite3/releases).
+
+Post-upgrade validation kept the daemon alive for more than 15 minutes across three consecutive Codex runs, repeated agent discovery calls, artifact writes, and PNG rendering. No new native assertion appeared after the upgraded daemon launch.
 
 ## Alternative considered
 
@@ -72,5 +80,9 @@ Verification completed on Node 24 / pnpm 10.33.2:
 - production-sample seed test
 - localized-content and iframe-shell template tests
 - browser review of all three seeded projects with five before/after rounds
+- production ad render integration test with exact PNG dimension assertions
+- `ffprobe` validation of the 1080×1920, H.264, 30fps, 10-second MP4
+- 24 representative daemon/SQLite tests after upgrading to `better-sqlite3@13.0.3`
+- live QR Scanner campaign run through Codex, followed by a second-pass claim/legibility review and corrected 1080×1350 PNG export
 
 Verdict: **approved for the fork branch**. No blocking correctness, architecture, security, or performance findings remain.

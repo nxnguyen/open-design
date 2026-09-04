@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A 4:5 Meta ad for Barcode & QR code scanner by Amobi Lab.">
+  <title>Point. Scan. Done. — Barcode & QR Scanner</title>
+  <style>
+    :root {
+      --bg: oklch(14% 0.018 172);
+      --surface: oklch(20% 0.024 172);
+      --fg: oklch(100% 0 0);
+      --muted: oklch(76% 0.012 172);
+      --border: oklch(34% 0.028 172);
+      --accent: oklch(64.88% 0.1258 172.03);
+      --display: "Avenir Next Condensed", "Helvetica Neue", sans-serif;
+      --body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+      background: oklch(8% 0.01 172);
+    }
+
+    body {
+      display: grid;
+      place-items: start center;
+      color: var(--fg);
+      font-family: var(--body);
+    }
+
+    .ad-canvas {
+      position: relative;
+      width: min(100vw, 1080px);
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        linear-gradient(oklch(100% 0 0 / 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, oklch(100% 0 0 / 0.028) 1px, transparent 1px),
+        var(--bg);
+      background-size: 10% 8%;
+    }
+
+    .ad-canvas::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 79% 63%, oklch(64.88% 0.1258 172.03 / 0.16), transparent 33%),
+        linear-gradient(132deg, transparent 58%, oklch(100% 0 0 / 0.035) 58.1%, transparent 58.3%);
+    }
+
+    .topbar {
+      position: absolute;
+      top: 5.2%;
+      left: 6.3%;
+      right: 6.3%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4%;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      gap: clamp(12px, 1.8vw, 20px);
+    }
+
+    .app-icon {
+      width: clamp(58px, 8.2vw, 88px);
+      height: clamp(58px, 8.2vw, 88px);
+      flex: 0 0 auto;
+      border-radius: 22%;
+      box-shadow: 0 18px 42px oklch(0% 0 0 / 0.25);
+    }
+
+    .brand-name {
+      margin: 0;
+      max-width: 350px;
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 720;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-byline {
+      display: block;
+      margin-top: 0.38em;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.67em;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .proof {
+      flex: 0 0 auto;
+      color: var(--fg);
+      font-family: var(--mono);
+      font-size: clamp(16px, 1.85vw, 20px);
+      line-height: 1.45;
+      letter-spacing: 0.08em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .proof strong {
+      display: block;
+      font-size: 1.45em;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-copy {
+      position: absolute;
+      top: 18.5%;
+      left: 6.3%;
+      width: 75%;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 2.2%;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: clamp(28px, 4vw, 44px);
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1 {
+      max-width: 800px;
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(62px, 10.6vw, 114px);
+      font-stretch: condensed;
+      font-weight: 900;
+      line-height: 0.86;
+      letter-spacing: -0.065em;
+      text-transform: uppercase;
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    .subhead {
+      max-width: 540px;
+      margin: 3.6% 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2.3vw, 25px);
+      font-weight: 520;
+      line-height: 1.42;
+      letter-spacing: -0.02em;
+    }
+
+    .phone-stage {
+      position: absolute;
+      right: 5.6%;
+      bottom: 4.2%;
+      width: 42%;
+      height: 59%;
+      z-index: 1;
+    }
+
+    .phone-shadow {
+      position: absolute;
+      right: -8%;
+      bottom: -2%;
+      width: 110%;
+      height: 22%;
+      border-radius: 50%;
+      background: oklch(0% 0 0 / 0.68);
+      filter: blur(28px);
+      transform: rotate(-8deg);
+    }
+
+    .phone {
+      position: absolute;
+      right: 3%;
+      bottom: 2%;
+      width: 79%;
+      padding: 2.2%;
+      overflow: hidden;
+      border: 2px solid oklch(100% 0 0 / 0.16);
+      border-radius: 10% / 5.6%;
+      background: oklch(7% 0.012 172);
+      box-shadow:
+        0 42px 90px oklch(0% 0 0 / 0.52),
+        inset 0 0 0 5px oklch(0% 0 0 / 0.75);
+      transform: rotate(4deg);
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 1.4%;
+      left: 50%;
+      z-index: 3;
+      width: 25%;
+      height: 1.1%;
+      border-radius: 999px;
+      background: oklch(7% 0.012 172);
+      transform: translateX(-50%);
+    }
+
+    .phone-screen {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 7.2% / 4.5%;
+    }
+
+    .scan-line {
+      position: absolute;
+      top: 53%;
+      left: -8%;
+      width: 114%;
+      height: 4px;
+      z-index: 4;
+      background: var(--accent);
+      box-shadow: 0 0 22px var(--accent), 0 0 50px oklch(64.88% 0.1258 172.03 / 0.7);
+      animation: scan 3.2s ease-in-out infinite;
+    }
+
+    @keyframes scan {
+      0%, 100% { transform: translateY(-120px); opacity: 0.35; }
+      50% { transform: translateY(130px); opacity: 1; }
+    }
+
+    .utility-panel {
+      position: absolute;
+      left: 6.3%;
+      bottom: 5.7%;
+      width: 45%;
+      z-index: 3;
+    }
+
+    .feature-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 7%;
+    }
+
+    .feature {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 0.72em 1em;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: oklch(20% 0.024 172 / 0.88);
+      color: var(--fg);
+      font-family: var(--mono);
+      font-size: clamp(16px, 1.85vw, 20px);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      backdrop-filter: blur(14px);
+    }
+
+    .feature-mark {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--fg);
+    }
+
+    .cta {
+      min-height: 64px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95em 1.6em;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background: var(--accent);
+      color: oklch(11% 0.018 172);
+      box-shadow: 0 18px 45px oklch(0% 0 0 / 0.32);
+      font-size: clamp(15px, 1.9vw, 21px);
+      font-weight: 850;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+    }
+
+    .cta:hover {
+      background: oklch(58.88% 0.1258 172.03);
+      color: oklch(100% 0 0);
+      transform: translateY(-2px);
+    }
+
+    .cta:active {
+      background: oklch(52.88% 0.115 172.03);
+      color: oklch(100% 0 0);
+      transform: translateY(0);
+    }
+
+    .cta:focus-visible {
+      outline: 4px solid var(--fg);
+      outline-offset: 5px;
+    }
+
+    .availability {
+      margin: 3.6% 0 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: clamp(15px, 1.75vw, 19px);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scan-line {
+        animation: none;
+      }
+
+      .cta {
+        transition: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .proof {
+        display: none;
+      }
+
+      .hero-copy {
+        width: 88%;
+      }
+
+      .subhead {
+        width: 70%;
+      }
+
+      .phone-stage {
+        right: 0;
+        width: 51%;
+      }
+
+      .utility-panel {
+        width: 51%;
+      }
+
+      .feature-row {
+        gap: 5px;
+      }
+
+      .feature {
+        min-height: 32px;
+      }
+
+      .cta {
+        min-height: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="ad-canvas" data-od-id="meta-ad-canvas" aria-label="Barcode and QR code scanner social advertisement">
+    <header class="topbar" data-od-id="brand-header">
+      <div class="brand-lockup">
+        <img class="app-icon" src="assets/qr-scanner-app-icon.png" width="512" height="512" alt="Barcode & QR code scanner app icon">
+        <p class="brand-name" data-od-id="app-name">
+          Barcode &amp; QR code scanner
+          <span class="brand-byline">Amobi Lab</span>
+        </p>
+      </div>
+      <div class="proof" data-od-id="download-proof">
+        Available on Google Play
+        <strong>1M+ downloads</strong>
+      </div>
+    </header>
+
+    <section class="hero-copy" data-od-id="hero-copy">
+      <p class="eyebrow">Fast scanning. Zero learning curve.</p>
+      <h1 data-od-id="hero-headline"><span>Point.</span><span>Scan. Done.</span></h1>
+      <p class="subhead">Read QR codes and barcodes instantly—online or offline.</p>
+    </section>
+
+    <section class="phone-stage" data-od-id="official-app-preview" aria-label="Official in-app scanning screen">
+      <div class="phone-shadow" aria-hidden="true"></div>
+      <div class="phone">
+        <img class="phone-screen" src="assets/qr-scanner-screenshot-01.jpg" width="370" height="592" alt="Official app screenshot showing a QR code being scanned">
+        <div class="scan-line" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="utility-panel" data-od-id="conversion-panel">
+      <div class="feature-row" data-od-id="feature-list">
+        <span class="feature" data-od-id="feature-offline"><span class="feature-mark" aria-hidden="true"></span>Works offline</span>
+        <span class="feature" data-od-id="feature-history"><span class="feature-mark" aria-hidden="true"></span>Saves history</span>
+      </div>
+      <a class="cta" data-od-id="download-cta" href="https://play.google.com/store/apps/details?id=com.amobi.barcode.qrcode.scanner" target="_blank" rel="noopener noreferrer">Get the app</a>
+      <p class="availability">Available on Google Play · Android</p>
+    </section>
+  </main>
+</body>
+</html>

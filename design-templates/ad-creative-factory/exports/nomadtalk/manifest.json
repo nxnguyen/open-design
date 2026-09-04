@@ -1,0 +1,31 @@
+{
+  "campaign": "NomadTalk — Tokyo acquisition",
+  "createdAt": "2026-09-04T11:20:39.535Z",
+  "files": [
+    {
+      "file": "story.png",
+      "format": "png",
+      "height": 1920,
+      "width": 1080
+    },
+    {
+      "file": "feed.png",
+      "format": "png",
+      "height": 1350,
+      "width": 1080
+    },
+    {
+      "file": "square.png",
+      "format": "png",
+      "height": 1080,
+      "width": 1080
+    },
+    {
+      "durationSeconds": 10,
+      "file": "story.mp4",
+      "format": "mp4",
+      "height": 1920,
+      "width": 1080
+    }
+  ]
+}
