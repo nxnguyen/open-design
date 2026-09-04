@@ -1,0 +1,52 @@
+{
+  "sample_rate": 8000,
+  "output_audio_lag_samples": -3,
+  "output_audio_lag_ms": -0.375,
+  "shot_boundary_errors": [
+    {
+      "frame": 118,
+      "seconds": 3.933333,
+      "nearest_beat": 8,
+      "beat_seconds": 3.933704,
+      "error_ms": -0.37,
+      "error_frames": -0.011
+    },
+    {
+      "frame": 280,
+      "seconds": 9.333333,
+      "nearest_beat": 19,
+      "beat_seconds": 9.34277,
+      "error_ms": -9.437,
+      "error_frames": -0.283
+    },
+    {
+      "frame": 413,
+      "seconds": 13.766667,
+      "nearest_beat": 28,
+      "beat_seconds": 13.76837,
+      "error_ms": -1.704,
+      "error_frames": -0.051
+    },
+    {
+      "frame": 546,
+      "seconds": 18.2,
+      "nearest_beat": 37,
+      "beat_seconds": 18.19397,
+      "error_ms": 6.03,
+      "error_frames": 0.181
+    },
+    {
+      "frame": 679,
+      "seconds": 22.633333,
+      "nearest_beat": 46,
+      "beat_seconds": 22.61957,
+      "error_ms": 13.763,
+      "error_frames": 0.413
+    }
+  ],
+  "max_absolute_boundary_error_frames": 0.413,
+  "acceptance": {
+    "audio_lag_ms": "informational; mastered mix includes SFX and dynamics processing",
+    "shot_boundary_error": "PASS when every cut is within 1.5 frames of the selected beat grid"
+  }
+}

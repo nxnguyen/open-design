@@ -4,12 +4,12 @@ export const HEIGHT = 1920;
 export const DURATION = 900;
 
 export const SHOTS = {
-  opening: {from: 0, duration: 120},
-  orbit: {from: 120, duration: 165},
-  signals: {from: 285, duration: 135},
-  radarTide: {from: 420, duration: 135},
-  accelerando: {from: 555, duration: 135},
-  launch: {from: 690, duration: 210},
+  opening: {from: 0, duration: 118},
+  orbit: {from: 118, duration: 162},
+  signals: {from: 280, duration: 133},
+  radarTide: {from: 413, duration: 133},
+  accelerando: {from: 546, duration: 133},
+  launch: {from: 679, duration: 221},
 } as const;
 
 export const clamp = (value: number, min = 0, max = 1) =>

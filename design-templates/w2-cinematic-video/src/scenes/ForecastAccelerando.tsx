@@ -3,7 +3,7 @@ import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame, useVideoCon
 import {Atmosphere, COLORS, DisplayTitle, Eyebrow, Vignette} from '../components';
 import {progress} from '../timeline';
 
-const cuts = [0, 49, 65, 77, 85, 91, 95];
+const cuts = [0, 44, 59, 74, 81, 89, 93];
 const screens = [
   'screens/today.png', 'screens/thirty-days.png', 'screens/metrics.png',
   'screens/sun-moon.png', 'screens/radar-tide.png', 'screens/moon-tide.png',
@@ -18,7 +18,7 @@ export const ForecastAccelerando: React.FC = () => {
   const active = screens[index % screens.length];
   const previousCut = cuts[Math.min(index, cuts.length - 1)];
   const impact = progress(frame, previousCut, previousCut + 4);
-  const exit = progress(frame, durationInFrames - 10, durationInFrames);
+  const exit = progress(frame, durationInFrames - 4, durationInFrames);
   return (
     <AbsoluteFill style={{overflow: 'hidden', background: COLORS.ink}}>
       <Atmosphere intensity={0.6} />

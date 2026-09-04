@@ -14,7 +14,7 @@ export const ForecastOrbit: React.FC = () => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
   const enter = progress(frame, 0, 24);
-  const exit = progress(frame, durationInFrames - 12, durationInFrames);
+  const exit = progress(frame, durationInFrames - 4, durationInFrames);
   const spin = frame * 0.16;
   return (
     <AbsoluteFill style={{overflow: 'hidden'}}>

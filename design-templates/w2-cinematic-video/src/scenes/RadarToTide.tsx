@@ -7,7 +7,7 @@ export const RadarToTide: React.FC = () => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
   const reveal = progress(frame, 42, 84);
-  const exit = progress(frame, durationInFrames - 12, durationInFrames);
+  const exit = progress(frame, durationInFrames - 4, durationInFrames);
   const angle = interpolate(reveal, [0, 1], [0, 360]);
   return (
     <AbsoluteFill style={{overflow: 'hidden'}}>

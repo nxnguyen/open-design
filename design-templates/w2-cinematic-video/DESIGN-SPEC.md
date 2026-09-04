@@ -71,12 +71,12 @@ are treated as mock design content, not current weather or a live forecast.
 
 | # | Time | Frames | Shot | New information / key motion |
 |---|---:|---:|---|---|
-| 1 | 0.0–4.0s | 0–119 | Sky Lock | Today screen rises from cloud shadow; spotlight finds the hourly chart, lifts it, traces once, then reseats. Caption: “SEE THE DAY AHEAD.” |
-| 2 | 4.0–9.5s | 120–284 | Forecast Orbit | Central phone slowly scrolls the 30-day page while four blue atmospheric rings breathe. Feature chips arrive separately: “HOURLY” and “30 DAYS”. |
-| 3 | 9.5–14.0s | 285–419 | Signal Self-test | Genuine metric cards form a readable console. Three restrained instrument needles sweep and settle. Caption: “RAIN. WIND. UV. AIR.” |
-| 4 | 14.0–18.5s | 420–554 | Radar to Tide | A 72-segment radar sweep reveals the tide screen. The luminous scan edge is the only transition effect. Caption: “RADAR AND TIDE — ONE VIEW.” |
-| 5 | 18.5–23.0s | 555–689 | Forecast Accelerando | Six crops of the same W2 product cut at shrinking 16→12→8→6→4-frame intervals, then freeze for readability. Caption: “EVERY SIGNAL. ONE FORECAST.” |
-| 6 | 23.0–30.0s | 690–899 | W2 Launch | Forecast, metric, AQI, sun, radar and tide components fly from four directions into a clean group portrait. W2 wordmark lands at the energy peak; “KNOW WHAT’S NEXT.” holds more than one second. |
+| 1 | 0.0–3.93s | 0–117 | Sky Lock | Today screen rises from cloud shadow; spotlight finds the hourly chart, lifts it, traces once, then reseats. Caption: “SEE THE DAY AHEAD.” |
+| 2 | 3.93–9.33s | 118–279 | Forecast Orbit | Central phone slowly scrolls the 30-day page while four blue atmospheric rings breathe. Feature chips arrive separately: “HOURLY” and “30 DAYS”. |
+| 3 | 9.33–13.77s | 280–412 | Signal Self-test | Genuine metric cards form a readable console. Three restrained instrument needles sweep and settle. Caption: “RAIN. WIND. UV. AIR.” |
+| 4 | 13.77–18.20s | 413–545 | Radar to Tide | A radial radar sweep reveals the tide screen. The luminous scan edge is the only transition effect. Caption: “SEE IT MOVE. BEFORE IT HITS.” |
+| 5 | 18.20–22.63s | 546–678 | Forecast Accelerando | Six crops of the same W2 product cut at shrinking 15→15→7→8→4-frame intervals, then freeze for readability. Caption: “THE WHOLE WEATHER STORY.” |
+| 6 | 22.63–30.0s | 679–899 | W2 Launch | Forecast, metric, AQI, sun, radar and tide components fly from four directions into a clean group portrait. W2 wordmark lands at the energy peak; “KNOW WHAT’S NEXT.” holds more than one second. |
 
 ## Acceptance frames
 
@@ -90,4 +90,3 @@ are treated as mock design content, not current weather or a live forecast.
 The storyboard is internally approved for autonomous production: every required
 function has one distinct motion language, no feature repeats as the hero, the
 opening has one focal subject, and the closing reserves a true brand hold.
-

@@ -7,7 +7,9 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "still": "remotion still src/index.ts W2Cinematic out/qa/still.png",
     "render:preview": "remotion render src/index.ts W2Cinematic out/iterations/latest-preview.mp4 --scale=0.333333 --concurrency=4",
-    "render": "remotion render src/index.ts W2Cinematic out/w2-cinematic-30s-raw.mp4 --concurrency=4",
+    "render:mix": "remotion render src/index.ts W2Cinematic out/w2-cinematic-30s-mix.mp4 --concurrency=4",
+    "render:audio": "remotion render src/index.ts W2Cinematic out/w2-cinematic-audio-mix.wav --codec=wav --concurrency=4",
+    "render": "npm run render:mix && npm run render:audio && ffmpeg -y -hide_banner -loglevel error -i out/w2-cinematic-30s-mix.mp4 -i out/w2-cinematic-audio-mix.wav -t 30 -map 0:v:0 -map 1:a:0 -c:v copy -af loudnorm=I=-16:TP=-1.5:LRA=11 -ar 48000 -c:a aac -b:a 192k -movflags +faststart out/w2-cinematic-30s-raw.mp4",
     "render:nobgm": "remotion render src/index.ts W2Cinematic out/w2-cinematic-30s-nobgm.mp4 --props=props-nobgm.json --concurrency=4"
   },
   "dependencies": {
@@ -21,4 +23,3 @@
     "typescript": "6.0.3"
   }
 }
-

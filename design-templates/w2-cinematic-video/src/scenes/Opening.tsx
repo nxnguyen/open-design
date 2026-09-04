@@ -8,7 +8,7 @@ export const Opening: React.FC = () => {
   const {durationInFrames} = useVideoConfig();
   const entrance = progress(frame, 0, 28);
   const drift = Math.sin(frame / 27) * 8;
-  const exit = progress(frame, durationInFrames - 14, durationInFrames);
+  const exit = progress(frame, durationInFrames - 4, durationInFrames);
   const spotlight = interpolate(frame, [0, 110], [-620, 760], {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.quad),
   });
